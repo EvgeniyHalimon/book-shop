@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+.navbar{
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.navbar_list li{
+  margin-right: 10px;
+}
+
+.about-block{
+  margin-top: 20px;
+}
+
+.about-block p{
+  width: 500px;
+  margin: 0 auto;
+}
+
+.about-title{
+  text-align: center;
+}
+
+.login-block{
+  width: 500px;
+  margin: 0 auto;
+}
+
+.login-form{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout{
+  text-align: right;
+  margin-right: 10px;
+}
+
+.logout-btn{
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.logout-btn:hover{
+  transform: scale(1.1);
+  animation: linear;
+}
+
+
+

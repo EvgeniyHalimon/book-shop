@@ -1,0 +1,73 @@
+{
+  "users": [
+    {
+      "name": "Джонни",
+      "surname": "Сильверхенд",
+      "email": "2077@mail.com",
+      "password": "1",
+      "roleId": "1",
+      "id": 1
+    }
+  ],
+  "roles": [
+    {
+      "name": "Admin", 
+      "rightsIds": [ 
+        "1", "2", "3", "5", "6", "7", "8", "9", "10", "11", "12"
+      ],
+      "id": "1"
+    }
+  ],
+  "rights": [
+    {
+      "name": "editUsers",
+      "id": "1"
+    },
+    {
+      "name": "createUsers",
+      "id": "2"
+    },
+    {
+      "name": "deleteUsers",
+      "id": "3"
+    },
+    {
+      "name": "createRole",
+      "id": "4"
+    },
+    {
+      "name": "requestRights",
+      "id": "5"
+    },
+    {
+      "name": "createRights",
+      "id": "6"
+    },
+    {
+      "name": "createGoods",
+      "id": "7"
+    },
+    {
+      "name": "editGoods",
+      "id": "8"
+    },
+    {
+      "name": "deleteGoods",
+      "id": "9"
+    },
+    {
+      "name": "editAboutUs",
+      "id": "10"
+    },
+    {
+      "name": "confirmOrder",
+      "id": "11"
+    }
+  ],
+  "books": [
+
+  ],
+  "rating": [
+
+  ]
+}
