@@ -92,7 +92,9 @@
   text-align: center;
 }
 
-.modal-right, .modal-role{
+.modal-right, 
+.modal-role,
+.modal-user{
   display: none;
   position: fixed;
   top: 0;
@@ -103,7 +105,9 @@
   overflow: auto;
 }
 
-.modal_content-right, .modal_content-role{
+.modal_content-right,
+.modal_content-role,
+.modal_content-user{
   display: grid;
   margin: 200px auto;
   background: white;
@@ -115,7 +119,6 @@
 .close{
   cursor: pointer;
 }
-
 
 .rule-list, .rule-btn, .role-list, .role-name,
 .rights, .list, .role-btn{
@@ -154,4 +157,12 @@
 
 input[type="checkbox"]{
   margin-right: 5px;
+}
+
+.modal_content-user input{
+  margin-bottom: 5px;
+}
+
+.modal_content-user select{
+  margin-bottom: 5px;
 }

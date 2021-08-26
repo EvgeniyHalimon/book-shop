@@ -5,7 +5,7 @@
       "surname": "Сильверхенд",
       "email": "2077@mail.com",
       "password": "1",
-      "roleId": "1",
+      "roleName": "Admin",
       "id": 1
     }
   ],
