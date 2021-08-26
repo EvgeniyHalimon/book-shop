@@ -11,63 +11,112 @@
   ],
   "roles": [
     {
-      "name": "Admin", 
-      "rightsIds": [ 
-        "1", "2", "3", "5", "6", "7", "8", "9", "10", "11", "12"
+      "name": "Admin",
+      "rightsIds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
       ],
-      "id": "1"
+      "id": 1
+    },
+    {
+      "name": "Subadmin",
+      "rightsIds": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "id": 2
+    },
+    {
+      "name": "Manager",
+      "rightsIds": [
+        6,
+        7,
+        8,
+        10,
+        11
+      ],
+      "id": 3
+    },
+    {
+      "name": "Salesman",
+      "rightsIds": [
+        10,
+        11
+      ],
+      "id": 4
+    },
+    {
+      "name": "User",
+      "rightsIds": [
+        12
+      ],
+      "id": 5
     }
   ],
   "rights": [
     {
-      "name": "editUsers",
-      "id": "1"
+      "name": "Редактировать пользователя",
+      "id": 1
     },
     {
-      "name": "createUsers",
-      "id": "2"
+      "name": "Создавать пользователя",
+      "id": 2
     },
     {
-      "name": "deleteUsers",
-      "id": "3"
+      "name": "Удалять пользователя",
+      "id": 3
     },
     {
-      "name": "createRole",
-      "id": "4"
+      "name": "Создавать роли",
+      "id": 4
     },
     {
-      "name": "requestRights",
-      "id": "5"
+      "name": "Передавать права",
+      "id": 5
     },
     {
-      "name": "createRights",
-      "id": "6"
+      "name": "Создавать права",
+      "id": 6
     },
     {
-      "name": "createGoods",
-      "id": "7"
+      "name": "Создавать товар",
+      "id": 7
     },
     {
-      "name": "editGoods",
-      "id": "8"
+      "name": "Редактировать товар",
+      "id": 8
     },
     {
-      "name": "deleteGoods",
-      "id": "9"
+      "name": "Удалять товар",
+      "id": 9
     },
     {
-      "name": "editAboutUs",
-      "id": "10"
+      "name": "Редактировать страницу О нас",
+      "id": 10
     },
     {
-      "name": "confirmOrder",
-      "id": "11"
+      "name": "Подтвержать заказ",
+      "id": 11
+    },
+    {
+      "name": "Покупать товары",
+      "id": 12
     }
   ],
-  "books": [
-
-  ],
-  "rating": [
-
-  ]
+  "books": [],
+  "rating": []
 }

@@ -17,6 +17,6 @@ async function loginUser(e) {
         return alert("Wrong password")
     }
     Storage.setData("account",res[0].id)
-    document.location.href="../html/books.html" 
+    document.location.href="../html/rights-roles.html"
 }
 

@@ -23,7 +23,7 @@ async function registerUser(e) {
         surname: lastName.value,
         email: email.value,
         password: password.value,
-        rank: "user"
+        roleId: "5"
     }
     Fetch.post("users", body)
     document.location.href="../html/login.html"

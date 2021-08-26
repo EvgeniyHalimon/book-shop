@@ -7,15 +7,23 @@
 }
 
 .navbar{
-  margin-top: 10px;
+  margin: 10px 0px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 
+.navbar_list{
+  display: flex;
+}
+
 .navbar_list li{
   margin-right: 10px;
+}
+
+.navbar_list li:last-child{
+  margin-right: 0;
 }
 
 .about-block{
@@ -58,5 +66,92 @@
   animation: linear;
 }
 
+.tabs-block{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.rights-block{
+  width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.rights-tab{
+  background: tomato;
+}
+
+.role-tab{
+  background: gray;
+}
+
+.role-block{
+  display: none;
+  width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.modal-right, .modal-role{
+  display: none;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  overflow: auto;
+}
+
+.modal_content-right, .modal_content-role{
+  display: grid;
+  margin: 200px auto;
+  background: white;
+  padding: 20px;
+  width: 20%;
+  z-index: 99999;
+}
+
+.close{
+  cursor: pointer;
+}
 
 
+.rule-list, .rule-btn, .role-list, .role-name,
+.rights, .list, .role-btn{
+  margin-bottom: 5px;
+}
+
+.pages, .page-list{
+  display: flex;
+  justify-content: center;
+}
+
+.pages li{
+  margin-right: 5px;
+}
+
+.pages li:last-child{
+  margin-right: 0;
+}
+
+.page-list li{
+  margin-right: 5px;
+}
+
+.page-list li:last-child{
+  margin-right: 0;
+}
+
+.pages-elem{
+  width: 20px;
+  height: 20px;
+}
+
+.page-active{
+  background: tomato;
+}
+
+input[type="checkbox"]{
+  margin-right: 5px;
+}

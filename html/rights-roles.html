@@ -10,10 +10,48 @@
 <body>
     <nav class="navbar">
         <ul class="navbar_list">
-            <li><a href="../html/register.html">Register</a></li>
-            <li><a href="../html/login.html">Login</a></li>
+            <li><a href="../html/register.html">Регистрация</a></li>
+            <li><a href="../html/login.html">Логин</a></li>
+            <li><a href="../html/about-us.html">О нас</a></li>
+            <li><a href="../html/basket.html">Корзина</a></li>
+            <li><a href="../html/books.html">Книги</a></li>
+            <li><a href="../html/order.html">Заказы</a></li>
+            <li><a href="../html/rights-roles.html">Права и роли</a></li>
+            <li><a href="../html/users.html">Пользователи</a></li>
         </ul>
     </nav>
-    <script src="" type="module"></script>
+    
+    <div class="tabs-block">
+        <button class="rights-tab"><h1>Права</h1></button>
+        <button class="role-tab"><h1>Роли</h1></button>
+    </div>
+
+    <div class="rights-block">
+        <button class="rule-btn">Создать новое правило</button>
+        <ul class="rule-list"></ul>
+        <ul class="pages"></ul>
+    </div>
+
+    <div class="role-block">
+        <button class="role-btn">Создать новую роль</button>
+        <ul class="role-list"></ul>
+        <ul class="page-list"></ul>
+    </div>
+
+    <div class="modal-right">
+        <div class="modal_content-right">
+            <input class="rights" type="text">
+            <button class="close">Сохранить</button>
+        </div>
+    </div>
+
+    <div class="modal-role">
+        <div class="modal_content-role">
+            <input class="role-name" type="text">
+            <ul class="list"></ul>
+            <button class="save">Сохранить</button>
+        </div>
+    </div>
+    <script src="../js/rights-roles.js" type="module"></script>
 </body>
 </html>
