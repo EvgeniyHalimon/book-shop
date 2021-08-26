@@ -42,13 +42,14 @@ saveBtn.addEventListener("click", () => {
     modalRight.style.display = "none" 
 })
 
-getRights()
-async function getRights() {
-    const getLength = await Fetch.get("rights")
-    const getFirstPage = await Fetch.get("rights?_page=1&_limit=5")
-    printRights(getFirstPage,ruleList)
+getRightsRule("rights",ruleList, pagesList)
+
+async function getRightsRule(key,list, pageList) {
+    const getLength = await Fetch.get(key)
+    const getFirstPage = await Fetch.get(`${key}?_page=1&_limit=5`)
+    printRights(getFirstPage,list)
     const pageQua = Math.ceil(getLength.length / 5)
-    pagesList.innerHTML = ""
+    pageList.innerHTML = ""
     for (let i = 0; i < pageQua; i++) {
         const elem = document.createElement("li")
         const page = document.createElement("button")
@@ -61,12 +62,12 @@ async function getRights() {
             const pageActive = document.querySelector(".page-active")
             e.currentTarget.classList.add("page-active")
             pageActive.classList.remove("page-active")
-            const getPage = await Fetch.get(`rights?_page=${page.id}&_limit=5`)
-            printRights(getPage,ruleList)
+            const getPage = await Fetch.get(`${key}?_page=${page.id}&_limit=5`)
+            printRights(getPage,list)
         })
         page.innerHTML = i + 1
         elem.appendChild(page)
-        pagesList.appendChild(elem)
+        pageList.appendChild(elem)
     }
 }
 
@@ -83,33 +84,7 @@ async function printRights(arr,list) {
 const roleList = document.querySelector(".role-list")
 const rolePage = document.querySelector(".page-list")
 
-getRoles()
-async function getRoles() {
-    const getLength = await Fetch.get("roles")
-    const getFirstPage = await Fetch.get("roles?_page=1&_limit=5")
-    printRights(getFirstPage,roleList)
-    const pageQua = Math.ceil(getLength.length / 5)
-    rolePage.innerHTML = ""
-    for (let i = 0; i < pageQua; i++) {
-        const elem = document.createElement("li")
-        const page = document.createElement("button")
-        page.classList.add("pages-elem")
-        page.id = i + 1
-        if(page.id == 1){
-            page.classList.add("page-active")
-        }
-        page.addEventListener("click", async (e) => {
-            const pageActive = document.querySelector(".page-active")
-            e.currentTarget.classList.add("page-active")
-            pageActive.classList.remove("page-active")
-            const getPage = await Fetch.get(`roles?_page=${page.id}&_limit=5`)
-            printRights(getPage,roleList)
-        })
-        page.innerHTML = i + 1
-        elem.appendChild(page)
-        rolePage.appendChild(elem)
-    }
-}
+getRightsRule("roles", roleList, rolePage)
 
 const modalRole = document.querySelector(".modal-role")
 const list = document.querySelector(".list")
