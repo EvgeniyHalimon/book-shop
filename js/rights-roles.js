@@ -1,5 +1,6 @@
 import { Fetch } from "./fetches.js"
 import getData  from "./getData.js"
+import tab from "./tab.js"
 
 const roleTab = document.querySelector(".role-tab")
 const rightsTab = document.querySelector(".rights-tab")
@@ -12,19 +13,8 @@ const pagesList = document.querySelector(".pages")
 const rightsBlock = document.querySelector(".rights-block")
 const roleBlock = document.querySelector(".role-block")
 
-rightsTab.addEventListener("click", () => {
-    roleTab.style.background = "gray"
-    rightsTab.style.background = "tomato"
-    roleBlock.style.display = "none"
-    rightsBlock.style.display = "block"
-})
-
-roleTab.addEventListener("click", () => {
-    rightsTab.style.background = "gray"
-    roleTab.style.background = "tomato"
-    rightsBlock.style.display = "none"
-    roleBlock.style.display = "block"
-})
+tab(roleTab,rightsTab,roleBlock,rightsBlock)
+tab(rightsTab,roleTab,rightsBlock,roleBlock)
 
 createRuleBtn.addEventListener("click", async () => {
     modalRight.style.display = "block"
@@ -41,11 +31,30 @@ saveBtn.addEventListener("click", () => {
     }
     Fetch.post("rights", body)
     modalRight.style.display = "none" 
+    getData("rights", ruleList, pagesList, print)
 })
 
-getData("rights",ruleList, pagesList, printRights)
+getData("rights", ruleList, pagesList, print)
 
-async function printRights(arr,list) {
+getRights()
+async function getRights() {
+    const rights = await Fetch.get("rights")
+    print(rights, ruleList)
+}
+
+
+const roleList = document.querySelector(".role-list")
+const rolePage = document.querySelector(".page-list")
+
+getData("roles", roleList, rolePage, print)
+
+getRoles()
+async function getRoles() {
+    const roles = await Fetch.get("roles")
+    print(roles, roleList)
+}
+
+function print(arr,list) {
     list.innerHTML = ""
     for (let i = 0; i < arr.length; i++) {
         const elem = document.createElement("li")
@@ -54,11 +63,6 @@ async function printRights(arr,list) {
         list.appendChild(elem)
     }
 }
-
-const roleList = document.querySelector(".role-list")
-const rolePage = document.querySelector(".page-list")
-
-getData("roles", roleList, rolePage, printRights)
 
 const modalRole = document.querySelector(".modal-role")
 const list = document.querySelector(".list")
@@ -101,4 +105,5 @@ saveRole.addEventListener("click", () => {
     }
     Fetch.post("roles", body)
     modalRole.style.display = "none" 
+    getData("roles", roleList, rolePage, print)
 })

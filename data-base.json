@@ -7,6 +7,46 @@
       "password": "1",
       "roleName": "Admin",
       "id": 1
+    },
+    {
+      "name": "qegtgrt",
+      "surname": "qe4343535",
+      "email": "user1@mail.com",
+      "password": "8224",
+      "roleName": "Manager",
+      "id": 3
+    },
+    {
+      "name": "3",
+      "surname": "3",
+      "email": "user2@mail.com",
+      "password": "1461",
+      "roleName": "Manager",
+      "id": 4
+    },
+    {
+      "name": "3",
+      "surname": "3",
+      "email": "user3@mail.com",
+      "password": "1461",
+      "roleName": "Manager",
+      "id": 5
+    },
+    {
+      "name": "3e",
+      "surname": "e",
+      "email": "q@a",
+      "password": "e",
+      "roleName": "Manager",
+      "id": 6
+    },
+    {
+      "name": "3e",
+      "surname": "e",
+      "email": "q@ae",
+      "password": "e",
+      "roleName": "Manager",
+      "id": 7
     }
   ],
   "roles": [
@@ -117,6 +157,29 @@
       "id": 12
     }
   ],
-  "books": [],
-  "rating": []
+  "books": [
+    {
+      "name": "Собака Баскервилей",
+      "author": "Артур Конан Дойл",
+      "genre": "Детектив",
+      "binding": "Твердый",
+      "year": "2021",
+      "id": 1
+    },
+    {
+      "name": "Красная лента",
+      "author": "Артур Конан Дойл",
+      "genre": "Детектив",
+      "binding": "Мягкий",
+      "year": "2020",
+      "id": 2
+    }
+  ],
+  "rating": [],
+  "about-us": [
+    {
+      "text": "\n            Deserunt ab doloremque consectetur laborum iusto?\n            Quas, sunt magnam? Deserunt, vero. Quis.",
+      "id": 1
+    }
+  ]
 }

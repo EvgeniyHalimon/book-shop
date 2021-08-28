@@ -23,4 +23,10 @@ export class Fetch{
             }
         })
     }
+
+    static delete(url){
+        return fetch(`http://localhost:3000/${url}`,{
+            method: "DELETE",
+        })
+    }
 }

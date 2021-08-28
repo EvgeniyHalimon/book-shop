@@ -26,15 +26,6 @@
   margin-right: 0;
 }
 
-.about-block{
-  margin-top: 20px;
-}
-
-.about-block p{
-  width: 500px;
-  margin: 0 auto;
-}
-
 .about-title{
   text-align: center;
 }
@@ -121,7 +112,7 @@
 }
 
 .rule-list, .rule-btn, .role-list, .role-name,
-.rights, .list, .role-btn{
+.rights, .list, .role-btn, .users-list{
   margin-bottom: 5px;
 }
 
@@ -159,10 +150,79 @@ input[type="checkbox"]{
   margin-right: 5px;
 }
 
+.users{
+  text-align: center;
+}
+
+.users-title,
+.create-user{
+  margin-bottom: 10px;
+}
+
 .modal_content-user input{
   margin-bottom: 5px;
 }
 
 .modal_content-user select{
   margin-bottom: 5px;
+}
+
+.list-elem{
+  display: flex;
+  justify-content: center;
+}
+
+.list-elem p{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.list-elem span{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.edit-input{
+  width: 95%;
+}
+
+.about-block{
+  text-align: center;
+}
+
+.about-block p{
+  width: 500px;
+  margin: 0 auto 20px auto;
+}
+
+.add-book-tab{
+  background: tomato;
+}
+.book-list-tab{
+  background: gray;
+}
+
+.form-block{
+  width: 500px;
+  margin: 0 auto;
+}
+
+.book-form{
+  display: grid;
+  margin: 0 auto;
+  width: 50%;
+}
+
+.book-form input{
+  margin-bottom: 5px;
+}
+
+.book-form select{
+  margin-bottom: 5px;
+}
+
+.list-block{
+  display: none;
 }

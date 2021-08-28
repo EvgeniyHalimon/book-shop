@@ -10,7 +10,6 @@ loginForm.addEventListener("submit", loginUser)
 async function loginUser(e) {
     e.preventDefault()
     const res = await Fetch.get(`users?email=${loginEmail.value}`)
-    console.log(res)
     if(res.length === 0){
         return alert("This user doesnt exist")
     }
@@ -18,7 +17,7 @@ async function loginUser(e) {
         return alert("Wrong password")
     }
     Storage.setData("account", res[0].id)
-    Storage.setData("role", res[0].roleId)
+    Storage.setData("role", res[0].roleName)
     document.location.href="../html/rights-roles.html"
 }
 

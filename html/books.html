@@ -10,17 +10,38 @@
 <body>
     <nav class="navbar">
         <ul class="navbar_list">
-            <li><a href="../html/register.html">Register</a></li>
-            <li><a href="../html/login.html">Login</a></li>
-            <li><a href="../html/about-us.html">Login</a></li>
-            <li><a href="../html/basket.html">Login</a></li>
-            <li><a href="../html/books.html">Login</a></li>
-            <li><a href="../html/order.html">Login</a></li>
-            <li><a href="../html/rights-roles.html">Login</a></li>
-            <li><a href="../html/users.html">Login</a></li>
+            <li><a href="../html/register.html">Регистрация</a></li>
+            <li><a href="../html/login.html">Логин</a></li>
+            <li><a href="../html/about-us.html">О нас</a></li>
+            <li><a href="../html/basket.html">Корзина</a></li>
+            <li><a href="../html/books.html">Книги</a></li>
+            <li><a href="../html/order.html">Заказы</a></li>
+            <li><a href="../html/rights-roles.html">Права и роли</a></li>
+            <li><a href="../html/users.html">Пользователи</a></li>
         </ul>
     </nav>
-    
-    <script src="" type="module"></script>
+    <div class="tabs-block">
+        <button class="add-book-tab"><h1>Добавить книгу</h1></button>
+        <button class="book-list-tab"><h1>Список книг</h1></button>
+    </div>
+    <div class="form-block">
+        <form class="book-form">
+            <input class="book-name" type="text" placeholder="Название книги">
+            <input class="author" type="text" placeholder="Автор">
+            <select class="author-select"></select>
+            <input class="genre" type="text" placeholder="Жанр">
+            <select class="genre-select"></select>
+            <input class="binding" type="text" placeholder="Переплет">
+            <select class="binding-select"></select>
+            <input class="year" type="text" placeholder="Год издания">
+            <select class="year-select"></select>
+            <input class="book-save" type="submit" value="Сохранить">
+        </form>
+    </div>
+    <div class="list-block">
+        <ul class="book-list"></ul>
+    </div>
+
+    <script src="../js/books.js" type="module"></script>
 </body>
 </html>

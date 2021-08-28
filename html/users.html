@@ -22,7 +22,7 @@
     </nav>
 
     <div class="users">
-        <h1>Пользователи</h1>
+        <h1 class="users-title">Пользователи</h1>
         <button class="create-user">Создать пользователя</button>
         <ul class="users-list"></ul>
         <ul class="page-list"></ul>
@@ -30,14 +30,17 @@
 
     <div class="modal-user">
         <form class="modal_content-user">
-            <input class="name" type="text">
-            <input class="surname" type="text">
-            <input class="email" type="text">
-            <input class="password" type="text">
+            <input class="name" type="text" placeholder="Имя" required>
+            <input class="surname" type="text" placeholder="Фамилия" required>
+            <input class="email" type="text" placeholder="Почта" required>
+            <button class="genEmail">Генерировать почту</button>
+            <input class="password" type="text" placeholder="Пароль" required>
+            <button class="genPass">Генерировать пароль</button>
             <select class="rank"></select>
-            <button class="save">Сохранить</button>
+            <input class="save" type="submit" value="Сохранить">
         </form>
     </div>
+
     <script src="../js/users.js" type="module"></script>
 </body>
 </html>
