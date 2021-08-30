@@ -150,7 +150,7 @@ input[type="checkbox"]{
   margin-right: 5px;
 }
 
-.users{
+.users, .save-changes{
   text-align: center;
 }
 
@@ -225,4 +225,83 @@ input[type="checkbox"]{
 
 .list-block{
   display: none;
+}
+
+.book-list{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.book-list li{
+  width: 230px;
+  margin-right: 15px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.book-img{
+  width: 200px;
+  border: 1px solid red;
+}
+
+.book-page-quantity{
+  margin-bottom: 5px;
+}
+
+.save-changes{
+  display: flex;
+  margin: 0 auto;
+}
+
+.btn-span{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.buy-span{
+  display: flex;
+  justify-content: center;
+}
+
+.buy-quantity{
+  width: 35px;
+  margin-right: 5px;
+}
+
+.btn-plus, .btn-minus{
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.btn-edit-book{
+  margin-right: 5px;
+}
+
+.chk{
+  display: none;
+}
+
+label::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-image: url(../img/like.svg);
+  cursor: pointer;
+}
+
+.chk:checked + label::before {
+  content: '';
+  background-image: url(../img/heart.svg);
+  cursor: pointer;
+}
+
+.filter-block{
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 10px;
 }
