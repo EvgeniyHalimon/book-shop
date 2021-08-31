@@ -159,31 +159,86 @@
   ],
   "books": [
     {
-      "name": "Галапагос",
+      "name": "Мать Тьма",
       "author": "Курт Воннегут",
       "genre": "Роман",
       "binding": "Твердый",
-      "year": "2019",
-      "price": "140",
-      "quantity": "1",
-      "pageQuantity": "325",
+      "year": 2021,
+      "price": 120,
+      "quantity": 11,
+      "pageQuantity": 225,
       "rating": 0,
-      "id": 11
+      "id": 1
+    },
+    {
+      "name": "Моя борьба",
+      "author": "Адольф Гитлер",
+      "genre": "Автобиография",
+      "binding": "Твердый",
+      "year": 2020,
+      "price": 55,
+      "quantity": 1,
+      "pageQuantity": 155,
+      "rating": 0,
+      "id": 2
+    },
+    {
+      "name": "Война и мир",
+      "author": "Лев Толстой",
+      "genre": "Роман",
+      "binding": "Твердый",
+      "year": 2018,
+      "price": 400,
+      "quantity": 2,
+      "pageQuantity": 500,
+      "rating": 0,
+      "id": 3
+    },
+    {
+      "name": "Собака Баскервилей",
+      "author": "Артур Конан Дойл",
+      "genre": "Детектив",
+      "binding": "Мягкий",
+      "year": 2019,
+      "price": 85,
+      "quantity": 2,
+      "pageQuantity": 200,
+      "rating": 0,
+      "id": 4
+    },
+    {
+      "name": "Старик и Море",
+      "author": "Эрнест Хемингуэй",
+      "genre": "Приключения",
+      "binding": "Мягкий",
+      "year": 2021,
+      "price": 65,
+      "quantity": 3,
+      "pageQuantity": 80,
+      "rating": 1,
+      "id": 5
     },
     {
       "name": "Галапагос",
       "author": "Курт Воннегут",
       "genre": "Роман",
       "binding": "Твердый",
-      "year": "2019",
-      "price": "140",
-      "quantity": "1",
-      "pageQuantity": "325",
+      "year": 2021,
+      "price": 250,
+      "quantity": 2,
+      "pageQuantity": 300,
       "rating": 0,
-      "id": 14
+      "id": 6
     }
   ],
-  "rating": [],
+  "rating": [
+    {
+      "userId": 1,
+      "bookId": 5,
+      "qua": 1,
+      "id": 1
+    }
+  ],
   "about-us": [
     {
       "text": "\n            Deserunt ab doloremque consectetur laborum iusto?\n            Quas, sunt magnam? Deserunt, vero. Quis.",

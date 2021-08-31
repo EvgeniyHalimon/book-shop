@@ -200,6 +200,7 @@ input[type="checkbox"]{
 .add-book-tab{
   background: tomato;
 }
+
 .book-list-tab{
   background: gray;
 }
@@ -239,6 +240,7 @@ input[type="checkbox"]{
   padding: 10px;
   border: 1px solid black;
   border-radius: 10px;
+  font-size: 14px;
 }
 
 .book-img{
@@ -302,6 +304,14 @@ label::before {
 
 .filter-block{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   margin-bottom: 10px;
+}
+
+.filter-block select{
+  margin: 0px 10px;
+}
+
+.book-search{
+  margin-right: 10px;
 }

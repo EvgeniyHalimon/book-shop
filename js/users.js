@@ -13,9 +13,8 @@ const userPassword = document.querySelector(".password")
 const genPass = document.querySelector(".genPass")
 const genEmail = document.querySelector(".genEmail")
 const select = document.querySelector(".rank")
-const saveBtn = document.querySelector(".save")
 
-getData("users", usersList, pageList, printUser)
+getData("users", usersList, pageList, printUser, `roleName`, `asc`)
 
 getList()
 async function getList() {
@@ -36,9 +35,9 @@ async function printUser(arr,list) {
                 <p class="list-text surname">${item.surname}</p>
                 <p class="list-text email">${item.email}</p>
                 <p class="list-text roleName">${item.roleName}</p> 
-                <span class="btn-span">
-                <button class="btn-edit">Редактировать</button>
-                <button class="btn-delete">Удалить</button>
+                <span class="span-btn">
+                    <button class="btn-edit">Редактировать</button>
+                    <button class="btn-delete">Удалить</button>
                 </span>
             `
             elem.innerHTML = listHtml
@@ -51,7 +50,7 @@ async function printUser(arr,list) {
             const surname = element.querySelector(".surname")
             const email = element.querySelector(".email")
             const roleName = element.querySelector(".roleName")
-            const btnSpan = element.querySelector(".btn-span")
+            const btnSpan = element.querySelector(".span-btn")
             btnEdit.addEventListener("click", async () => {
                 btnEdit.style.display = "none"
                 const btnSave = document.createElement("button")
@@ -149,7 +148,7 @@ form.addEventListener("submit", async (e) => {
         roleName: select.value
     }
     Fetch.post("users", body)
-    getData("users", usersList, pageList, printUser)
+    getData("users", usersList, pageList, printUser, `roleName`, `asc`)
     getList()
     modalUser.style.display = "none" 
 })

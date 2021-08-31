@@ -1,8 +1,8 @@
 import { Fetch } from "./fetches.js"
 
-export default async function getData(key,list, pageList,func) {
+export default async function getData(key,list, pageList, func, keyWord, order) {
     const getLength = await Fetch.get(key)
-        const getFirstPage = await Fetch.get(`${key}?_page=1&_limit=5`)
+        const getFirstPage = await Fetch.get(`${key}?_page=1&_limit=5&_sort=${keyWord}&_order=${order}`)
         func(getFirstPage,list)
         const pageQua = Math.ceil(getLength.length / 5)
         pageList.innerHTML = ""
@@ -18,7 +18,7 @@ export default async function getData(key,list, pageList,func) {
                 const pageActive = document.querySelector(".page-active")
                 e.currentTarget.classList.add("page-active")
                 pageActive.classList.remove("page-active")
-                const getPage = await Fetch.get(`${key}?_page=${page.id}&_limit=5`)
+                const getPage = await Fetch.get(`${key}?_page=${page.id}&_limit=5&_sort=${keyWord}&_order=${order}`)
                 func(getPage,list)
             })
             page.innerHTML = i + 1

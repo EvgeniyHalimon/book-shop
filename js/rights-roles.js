@@ -31,10 +31,10 @@ saveBtn.addEventListener("click", () => {
     }
     Fetch.post("rights", body)
     modalRight.style.display = "none" 
-    getData("rights", ruleList, pagesList, print)
+    getData("rights", ruleList, pagesList, print, `name`, `asc`)
 })
 
-getData("rights", ruleList, pagesList, print)
+getData("rights", ruleList, pagesList, print, `name`, `asc`)
 
 getRights()
 async function getRights() {
@@ -46,7 +46,7 @@ async function getRights() {
 const roleList = document.querySelector(".role-list")
 const rolePage = document.querySelector(".page-list")
 
-getData("roles", roleList, rolePage, print)
+getData("roles", roleList, rolePage, print, `name`, `asc`)
 
 getRoles()
 async function getRoles() {
@@ -105,5 +105,5 @@ saveRole.addEventListener("click", () => {
     }
     Fetch.post("roles", body)
     modalRole.style.display = "none" 
-    getData("roles", roleList, rolePage, print)
+    getData("roles", roleList, rolePage, print, `name`, `asc`)
 })

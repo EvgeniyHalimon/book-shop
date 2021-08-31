@@ -45,26 +45,26 @@
     
     <div class="list-block">
         <div class="filter-block">
-            <input class="book-search" type="text" placeholder="Название книги">
+            <input class="book-search" type="text" placeholder="Поиск..">
             <button class="btn-search">Искать</button>
-            <select class="author-filter">
-            </select>
-            <select class="genre-filter">
-            </select>
-            <select class="binding-filter">
-                <option>Мягкий</option>
-                <option>Твердый</option>
-            </select>
-            <select class="year-filter">
-            </select>
+
+            <select class="author-filter"></select>
+            <button class="author-btn">Фильтр</button>
+
+            <select class="genre-filter"></select>
+            <button class="genre-btn">Фильтр</button>
+
+            <select class="binding-filter"></select>
+            <button class="binding-btn">Фильтр</button>
+
+            <select class="year-filter"></select>
+            <button class="year-btn">Фильтр</button>
+            
             <select class="price-filter">
-                <option>От высокой к низкой</option>
-                <option>От низкой к высокой</option>
+                <option value="1">От высокой к низкой</option>
+                <option value="2">От низкой к высокой</option>
             </select>
-            <select class="rate-filter">
-                <option>От высокого к низкому</option>
-                <option>От низкого к высокому</option>
-            </select>
+            <button class="price-btn">Фильтр</button>
         </div>
         <ul class="book-list"></ul>
         <ul class="page-list"></ul>
