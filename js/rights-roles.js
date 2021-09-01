@@ -1,6 +1,7 @@
 import { Fetch } from "./fetches.js"
 import getData  from "./getData.js"
 import tab from "./tab.js"
+import printSearchRes from "./printSearhResult.js"
 
 const roleTab = document.querySelector(".role-tab")
 const rightsTab = document.querySelector(".rights-tab")
@@ -36,23 +37,10 @@ saveBtn.addEventListener("click", () => {
 
 getData("rights", ruleList, pagesList, print, `name`, `asc`)
 
-getRights()
-async function getRights() {
-    const rights = await Fetch.get("rights")
-    print(rights, ruleList)
-}
-
-
 const roleList = document.querySelector(".role-list")
 const rolePage = document.querySelector(".page-list")
 
 getData("roles", roleList, rolePage, print, `name`, `asc`)
-
-getRoles()
-async function getRoles() {
-    const roles = await Fetch.get("roles")
-    print(roles, roleList)
-}
 
 function print(arr,list) {
     list.innerHTML = ""

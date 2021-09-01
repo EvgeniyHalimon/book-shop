@@ -312,6 +312,10 @@ label::before {
   margin: 0px 10px;
 }
 
-.book-search{
+.filter-block input{
+  margin-right: 10px;
+}
+
+.btn-search{
   margin-right: 10px;
 }

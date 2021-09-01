@@ -9,44 +9,44 @@
       "id": 1
     },
     {
-      "name": "qegtgrt",
-      "surname": "qe4343535",
-      "email": "user1@mail.com",
-      "password": "8224",
-      "roleName": "Manager",
-      "id": 3
-    },
-    {
-      "name": "3",
-      "surname": "3",
+      "name": "tak",
+      "surname": "umo",
       "email": "user2@mail.com",
       "password": "1461",
-      "roleName": "Manager",
+      "roleName": "Admin",
       "id": 4
     },
     {
-      "name": "3",
-      "surname": "3",
+      "name": "sad",
+      "surname": "tor",
       "email": "user3@mail.com",
       "password": "1461",
-      "roleName": "Manager",
+      "roleName": "Admin",
       "id": 5
     },
     {
-      "name": "3e",
-      "surname": "e",
-      "email": "q@a",
-      "password": "e",
-      "roleName": "Manager",
-      "id": 6
+      "name": "dad",
+      "surname": "dad",
+      "email": "user164256@mail.com",
+      "password": "7928",
+      "roleName": "Admin",
+      "id": 9
     },
     {
-      "name": "3e",
-      "surname": "e",
-      "email": "q@ae",
-      "password": "e",
-      "roleName": "Manager",
-      "id": 7
+      "name": "xaxas",
+      "surname": "wer",
+      "email": "user331779@mail.com",
+      "password": "7091",
+      "roleName": "Salesman",
+      "id": 10
+    },
+    {
+      "name": "Tau",
+      "surname": "Volantis",
+      "email": "user720940@mail.com",
+      "password": "3557",
+      "roleName": "User",
+      "id": 11
     }
   ],
   "roles": [
@@ -163,10 +163,10 @@
       "author": "Курт Воннегут",
       "genre": "Роман",
       "binding": "Твердый",
-      "year": 2021,
-      "price": 120,
-      "quantity": 11,
-      "pageQuantity": 225,
+      "year": "2021",
+      "price": "120",
+      "quantity": "11",
+      "pageQuantity": "225",
       "rating": 0,
       "id": 1
     },
@@ -174,10 +174,10 @@
       "name": "Моя борьба",
       "author": "Адольф Гитлер",
       "genre": "Автобиография",
-      "binding": "Твердый",
+      "binding": "Мягкий",
       "year": 2020,
-      "price": 55,
-      "quantity": 1,
+      "price": 400,
+      "quantity": 2,
       "pageQuantity": 155,
       "rating": 0,
       "id": 2
@@ -188,10 +188,10 @@
       "genre": "Роман",
       "binding": "Твердый",
       "year": 2018,
-      "price": 400,
+      "price": 350,
       "quantity": 2,
       "pageQuantity": 500,
-      "rating": 0,
+      "rating": 1,
       "id": 3
     },
     {
@@ -203,7 +203,7 @@
       "price": 85,
       "quantity": 2,
       "pageQuantity": 200,
-      "rating": 0,
+      "rating": 1,
       "id": 4
     },
     {
@@ -227,16 +227,82 @@
       "price": 250,
       "quantity": 2,
       "pageQuantity": 300,
-      "rating": 0,
+      "rating": 1,
       "id": 6
+    },
+    {
+      "name": "Бесы",
+      "author": "Федор Достоевский",
+      "genre": "Роман",
+      "binding": "Твердый",
+      "year": 2015,
+      "price": 250,
+      "quantity": 3,
+      "pageQuantity": 450,
+      "rating": 1,
+      "id": 7
+    },
+    {
+      "name": "Дорога",
+      "author": "Кормак Маккарти",
+      "genre": "Постапокалиптика",
+      "binding": "Твердый",
+      "year": 2021,
+      "price": 135,
+      "quantity": 1,
+      "pageQuantity": 300,
+      "rating": 1,
+      "id": 8
+    },
+    {
+      "name": "Старикам тут не место",
+      "author": "Кормак Маккарти",
+      "genre": "Роман",
+      "binding": "Твердый",
+      "year": 2021,
+      "price": 135,
+      "quantity": 2,
+      "pageQuantity": 300,
+      "rating": 0,
+      "id": 9
     }
   ],
   "rating": [
     {
       "userId": 1,
-      "bookId": 5,
+      "bookId": 7,
       "qua": 1,
       "id": 1
+    },
+    {
+      "userId": 1,
+      "bookId": 5,
+      "qua": 1,
+      "id": 2
+    },
+    {
+      "userId": 1,
+      "bookId": 6,
+      "qua": 1,
+      "id": 3
+    },
+    {
+      "userId": 1,
+      "bookId": 4,
+      "qua": 1,
+      "id": 4
+    },
+    {
+      "userId": 1,
+      "bookId": 3,
+      "qua": 1,
+      "id": 5
+    },
+    {
+      "userId": 1,
+      "bookId": 8,
+      "qua": 1,
+      "id": 6
     }
   ],
   "about-us": [

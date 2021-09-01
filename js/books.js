@@ -1,6 +1,7 @@
 import { Fetch } from "./fetches.js"
 import tab from "./tab.js"
 import getData  from "./getData.js"
+import printSearchRes from "./printSearhResult.js"
 import { Storage } from "./getDataFromStorage.js"
 
 const account = Storage.getData("account")
@@ -29,114 +30,33 @@ saveChanges.style.display = "none"
 tab(bookTabList,addBookTab,listBlock,formBlock)
 tab(addBookTab,bookTabList,formBlock,listBlock)
 
-async function getAuthor(select) {
-    const data = await Fetch.get("books?_sort=author&_order=asc")
+async function getSelect(select,key,order) {
+    const data = await Fetch.get(`books?_sort=${key}&_order=${order}`)
     let resArr = []
     data.filter((item) => {
-        let i = resArr.findIndex(x => (x.author == item.author));
+        let i = resArr.findIndex(x => (x[key] == item[key]));
+        
         if(i <= -1){
             resArr.push(item);
         }
         return null;
     })
-    for (let i = 0; i < resArr.length; i++) {
-        const option = document.createElement("option")
-        option.id = i + 1
-        const {author} = resArr[i]
-        option.innerHTML = `${author}`
-        select.appendChild(option)
-    } 
-}
-getAuthor(authorSelect)
 
-async function getGenre(select) {
-    const data = await Fetch.get("books?_sort=genre&_order=asc")
-    let resArr = []
-    data.filter((item) => {
-        let i = resArr.findIndex(x => (x.genre == item.genre));
-        if(i <= -1){
-            resArr.push(item);
-        }
-        return null;
+    resArr.forEach((item) => {
+        const option = document.createElement("option")
+        option.id = `${item.id}+`
+        option.innerHTML = item[key]
+        select.appendChild(option)
     })
-    for (let i = 0; i < resArr.length; i++) {
-        const option = document.createElement("option")
-        option.id = i + 1
-        const {genre} = resArr[i]
-        option.innerHTML = `${genre}`
-        select.appendChild(option)
-    } 
 }
-getGenre(genreSelect)
 
-async function getBinding(select) {
-    const data = await Fetch.get("books?_sort=binding&_order=asc")
-    let resArr = []
-    data.filter((item) => {
-        let i = resArr.findIndex(x => (x.binding == item.binding));
-        if(i <= -1){
-            resArr.push(item);
-        }
-        return null;
-    })
-    for (let i = 0; i < resArr.length; i++) {
-        const option = document.createElement("option")
-        option.id = i + 1
-        const {binding} = resArr[i]
-        option.innerHTML = `${binding}`
-        select.appendChild(option)
-    } 
-}
-getBinding(bindingSelect)
+getSelect(authorSelect, "author", "asc")
+getSelect(genreSelect, "genre", "asc")
+getSelect(bindingSelect, "binding", "asc")
+getSelect(yearSelect, "year", "desc")
 
-async function getYear(select) {
-    const data = await Fetch.get("books?_sort=year&_order=desc")
-    let resArr = []
-    data.filter((item) => {
-        let i = resArr.findIndex(x => (x.year == item.year));
-        if(i <= -1){
-            resArr.push(item);
-        }
-        return null;
-    })
-    
-    for (let i = 0; i < resArr.length; i++) {
-        const option = document.createElement("option")
-        option.id = i + 1
-        const {year} = resArr[i]
-        option.innerHTML = `${year}`
-        select.appendChild(option)
-    } 
-}
-getYear(yearSelect)
-
-/* async function getYear() {
-    const data = await Fetch.get("books")
-    let [{year}] = data
-    console.log(year)
-    console.log(year)
-    function test(year) {
-        let resArr = []
-        data.filter((item) => {
-            let i = resArr.findIndex(x => (x.key == item.key));
-            if(i <= -1){
-                resArr.push(item);
-            }
-            return null;
-        })
-        for (let i = 0; i < resArr.length; i++) {
-            const option = document.createElement("option")
-            option.id = i + 1
-            const {key} = resArr[i]
-            option.innerHTML = `${key}`
-            yearSelect.appendChild(option)
-        } 
-    }
-    test(year)
-}
-getYear() */
-
-bookForm.addEventListener("submit", async () => {
+bookForm.addEventListener("submit", async (e) => {
+    e.preventDefault()
     const body = {
         name: bookName.value,
         author: author.value || authorSelect.value,
@@ -149,19 +69,14 @@ bookForm.addEventListener("submit", async () => {
         rating: 0
     }
     Fetch.post("books", body)
-    getData("books", bookList, pageList, printBook, `rating`, `desc`)
+    printSearchRes("books?", bookList, pageList, printBook, `rating`, `desc`)
+    window.location.reload()
 })
 
 const bookList = document.querySelector(".book-list")
 const pageList = document.querySelector(".page-list")
 
-getData("books", bookList, pageList, printBook, `rating`, `desc`)
-
-getBooks()
-async function getBooks() {
-    const books = await Fetch.get("books")
-    printBook(books, bookList)
-}
+printSearchRes("books?", bookList, pageList, printBook, `rating`, `desc`)
 
 async function printBook(arr,list) {
     list.innerHTML = ""
@@ -227,7 +142,11 @@ async function printBook(arr,list) {
 
             btnDelete.addEventListener("click", async () => {
                 await Fetch.delete(`books/${item.id}`)
-                getBooks()
+                /* getData("books", bookList, pageList, printBook, `rating`, `desc`) */
+                const page = document.querySelector(".page-active")
+                console.log(page.id)
+                const res = await Fetch.get(`books?_page=${page.id}&_limit=5&_sort=rating&_order=desc`)
+                printBook(res, bookList) 
             })
 
             btnPlus.addEventListener("click", () => {
@@ -257,15 +176,17 @@ async function printBook(arr,list) {
                         rating: item.rating + 1
                     }
                     await Fetch.patch(`books/${item.id}`, body)
-                    getBooks()
+                    /* getData("books", bookList, pageList, printBook, `rating`, `desc`) */
+                    const page = document.querySelector(".page-active")
+                    console.log(page.id)
+                    const res = await Fetch.get(`books?_page=${page.id}&_limit=5&_sort=rating&_order=desc`)
+                    printBook(res, bookList)
                 }
             })
-
             btnBuy.addEventListener("click", () => {
                 console.log("+")
             })
         }
-
         list.appendChild(elem)
     })
 }
@@ -273,65 +194,79 @@ async function printBook(arr,list) {
 saveChanges.addEventListener("click", async (e) => {
     const body = {
         name: bookName.value,
-        author: author.value,
-        genre: genre.value,
-        binding: binding.value,
-        year: year.value,
-        price: price.value,
-        quantity: quantity.value,
-        pageQuantity: pageQuantity.value,
+        author: author.value || authorFilter.value,
+        genre: genre.value || genreSelect.value,
+        binding: binding.value || bindingSelect.value,
+        year: +year.value || +yearSelect.value,
+        price: +price.value,
+        quantity: +quantity.value,
+        pageQuantity: +pageQuantity.value,
     }
     await Fetch.patch(`books/${e.target.id}`, body)
-    getBooks()
+    getData("books", bookList, pageList, printBook, `rating`, `desc`)
     saveChanges.style.display = "none"
     bookSave.style.display = "inline-block"
+    window.location.reload()
 })
 
 const bookSearch = document.querySelector(".book-search")
 const btnSearch = document.querySelector(".btn-search")
+
 const authorFilter = document.querySelector(".author-filter")
-const authorBtn = document.querySelector(".author-btn")
 const genreFilter = document.querySelector(".genre-filter")
-const genreBtn = document.querySelector(".genre-btn")
 const bindingFilter = document.querySelector(".binding-filter")
-const bindingBtn = document.querySelector(".binding-btn")
-const yearFilter = document.querySelector(".year-filter")
+const yearFilterLess = document.querySelector(".year-filter-less")
+const yearFilterGreat = document.querySelector(".year-filter-great")
 const yearBtn = document.querySelector(".year-btn")
+
+yearFilterLess.value = 2021
+yearFilterGreat.value = 2021
+
 const priceFilter = document.querySelector(".price-filter")
 const priceBtn = document.querySelector(".price-btn")
 
-
-btnSearch.addEventListener("click", async () => {
-    const searchRes = await Fetch.get(`books?q=${bookSearch.value}`)
-    printBook(searchRes, bookList)
-})
-
-getAuthor(authorFilter)
-getBinding(bindingFilter)
-getGenre(genreFilter)
-getYear(yearFilter)
-
-btnFilter(authorBtn,authorFilter)
-btnFilter(genreBtn,genreFilter)
-btnFilter(bindingBtn,bindingFilter)
-btnFilter(yearBtn,yearFilter)
-
-
-function btnFilter(btn,key) {
-    btn.addEventListener("click", async () => {
-        const res = await Fetch.get(`books?q=${key.value}`)
-        printBook(res, bookList)
+function search(key1, key2, key3, key4, key5) {
+    yearBtn.addEventListener("click", async () => {
+        let str1 = `author=${key1.value}&`
+        let str2 = `binding=${key2.value}&`
+        let str3 = `genre=${key3.value}&`
+        let str4 = `year_gte=${Number(key4.value)}&`
+        let str5 = `year_lte=${Number(key5.value)}`
+        if(key1.value == ""){
+            str1 = ""
+        }
+        if(key2.value == ""){
+            str2 = ""
+        }
+        if(key3.value == ""){
+            str3 = ""
+        }
+        if(key4.value == ""){
+            str4 = ""
+        }
+        if(key5.value == ""){
+            str5 = ""
+        }  
+        if(key1.value == "" && key2.value == "" && key3.value == "" && key4.value == "" && key5.value == ""){
+            printSearchRes("books?", bookList, pageList, printBook, `rating`, `desc`)
+        }
+        const searchRes = await Fetch.get(`books?${str1}${str2}${str3}${str4}`)
+        console.log(searchRes)
+        printSearchRes(`books?${str1}${str2}${str3}${str4}${str5}`, bookList, pageList, printBook, `rating`, `desc`)
     })
 }
+search(authorFilter, bindingFilter, genreFilter, yearFilterLess, yearFilterGreat)
 
-priceBtn.addEventListener("click", async () => {
+btnSearch.addEventListener("click", async () => {
+    printSearchRes(`books?q=${bookSearch.value}`, bookList, pageList, printBook, `rating`, `desc`)
+})
+
+priceBtn.addEventListener("click", () => {
     if(priceFilter.value == 1){
-        const res = await Fetch.get("books?_sort=price&_order=desc")
-        getData("books", bookList, pageList, printBook, `price`, `desc`)
+        printSearchRes("books?", bookList, pageList, printBook, `price`, `desc`)
     }
     if(priceFilter.value == 2){
-        const res = await Fetch.get("books?_sort=price&_order=asc")
-        getData("books", bookList, pageList, printBook, `price`, `asc`)
+        printSearchRes("books?", bookList, pageList, printBook, `price`, `asc`)
     }
 })
 

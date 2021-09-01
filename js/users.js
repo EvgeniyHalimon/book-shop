@@ -16,12 +16,6 @@ const select = document.querySelector(".rank")
 
 getData("users", usersList, pageList, printUser, `roleName`, `asc`)
 
-getList()
-async function getList() {
-    const res = await Fetch.get("users")
-    printUser(res,usersList)
-}
-
 async function printUser(arr,list) {
     list.innerHTML = ""
     arr.forEach((item) => {
@@ -51,55 +45,66 @@ async function printUser(arr,list) {
             const email = element.querySelector(".email")
             const roleName = element.querySelector(".roleName")
             const btnSpan = element.querySelector(".span-btn")
-            btnEdit.addEventListener("click", async () => {
+
+            btnEdit.addEventListener("click", () => {
                 btnEdit.style.display = "none"
                 const btnSave = document.createElement("button")
                 btnSave.innerHTML = "Сохранить"
                 const nameInput = document.createElement("input")
                 const surnameInput = document.createElement("input")
                 const emailInput = document.createElement("input")
-                const select = document.createElement("select")
+                const selectEdit = document.createElement("select")
                 nameInput.classList.add("edit-input")
                 nameInput.value = name.innerHTML
                 surnameInput.classList.add("edit-input")
                 surnameInput.value = surname.innerHTML
                 emailInput.classList.add("edit-input")
                 emailInput.value = email.innerHTML
-                select.classList.add("edit-input")
-                const roles = await Fetch.get("roles")
-                for (let i = 0; i < roles.length; i++) {
-                    const option = document.createElement("option")
-                    option.id = i + 1
-                    const {name} = roles[i]
-                    option.innerHTML = `${name}`
-                    select.appendChild(option)
-                }
+                selectEdit.classList.add("edit-input")
                 name.innerHTML = ""
                 surname.innerHTML = ""
                 email.innerHTML = ""
                 roleName.innerHTML = ""
+                getSelect(selectEdit, "name")
                 name.appendChild(nameInput)
                 surname.appendChild(surnameInput)
                 email.appendChild(emailInput)
-                roleName.appendChild(select)
+                roleName.appendChild(selectEdit)
                 btnSpan.prepend(btnSave)
                 btnSave.addEventListener("click", async () => {
                     const body = {
                         name: nameInput.value,
                         surname: surnameInput.value,
                         email: emailInput.value,
-                        roleName: select.value
+                        roleName: selectEdit.value
                     }
                     await Fetch.patch(`users/${item.id}`, body)
-                    getList()
+                    /* getData("users", usersList, pageList, printUser, `roleName`, `asc`) */
+                    const page = document.querySelector(".page-active")
+                    const res = await Fetch.get(`users?_page=${page.id}&_limit=5&_sort=roleName&_order=asc`)
+                    printUser(res, usersList) 
                 })
             })
             btnDelete.addEventListener("click", async () => {
                 await Fetch.delete(`users/${item.id}`)
-                getList()
+                /* getData("users", usersList, pageList, printUser, `roleName`, `asc`) */
+                const page = document.querySelector(".page-active")
+                const res = await Fetch.get(`users?_page=${page.id}&_limit=5&_sort=roleName&_order=asc`)
+                printUser(res, usersList) 
             })
         }
         list.appendChild(elem)
+    })
+}
+
+async function getSelect(select,key) {
+    const roles = await Fetch.get("roles")
+    select.innerHTML = ""
+    roles.forEach((item) => {
+        const option = document.createElement("option")
+        option.id = `${item.id}+`
+        option.innerHTML = item[key]
+        select.appendChild(option)
     })
 }
 
@@ -114,7 +119,7 @@ createBtn.addEventListener("click", async () => {
         e.preventDefault()
         let condition = true
         do {
-            const pass = Math.floor(Math.random() * 3) + 1
+            const pass = Math.floor(Math.random() * 1000000) + 1
             const email = `user${pass}@mail.com`
             const res = await Fetch.get(`users?email=${email}`)
             if(res.length == 0){
@@ -128,14 +133,8 @@ createBtn.addEventListener("click", async () => {
             modalUser.style.display = "none"
         }
     }
-    const roles = await Fetch.get("roles")
-    for (let i = 0; i < roles.length; i++) {
-        const option = document.createElement("option")
-        option.id = i + 1
-        const {name} = roles[i]
-        option.innerHTML = `${name}`
-        select.appendChild(option)
-    }        
+    console.log(select)
+    getSelect(select, "name")       
 })
 
 form.addEventListener("submit", async (e) => {
@@ -149,9 +148,5 @@ form.addEventListener("submit", async (e) => {
     }
     Fetch.post("users", body)
     getData("users", usersList, pageList, printUser, `roleName`, `asc`)
-    getList()
     modalUser.style.display = "none" 
 })
-
-
-
