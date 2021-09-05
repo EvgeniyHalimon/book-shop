@@ -5,19 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-    <title>О нас</title>
+    <title>К Н И Г И</title>
 </head>
 <body>
     <nav class="navbar">
         <ul class="navbar_list">
-            <li><a href="../html/register.html">Регистрация</a></li>
-            <li><a href="../html/login.html">Логин</a></li>
-            <li><a href="../html/about-us.html">О нас</a></li>
-            <li><a href="../html/basket.html">Корзина</a></li>
-            <li><a href="../html/books.html">Книги</a></li>
-            <li><a href="../html/order.html">Заказы</a></li>
-            <li><a href="../html/rights-roles.html">Права и роли</a></li>
-            <li><a href="../html/users.html">Пользователи</a></li>
+            <li><a class="nav-register" href="../html/register.html">Регистрация</a></li>
+            <li><a class="nav-login" href="../html/login.html">Логин</a></li>
+            <li><a class="nav-about" href="../html/about-us.html">О нас</a></li>
+            <li><a class="nav-basket" href="../html/basket.html">Корзина</a></li>
+            <li><a class="nav-books" href="../html/books.html">Книги</a></li>
+            <li><a class="nav-orders" href="../html/order.html">Заказы</a></li>
+            <li><a class="nav-rights-roles" href="../html/rights-roles.html">Права и роли</a></li>
+            <li><a class="nav-users" href="../html/users.html">Пользователи</a></li>
         </ul>
     </nav>
     <div class="tabs-block">
@@ -48,14 +48,14 @@
             <input class="book-search" type="text" placeholder="Поиск..">
             <button class="btn-search">Искать</button>
 
-            <input class="author-filter" placeholder="Автор" type="text">
+            <input class="author-filter filter-input" name="author" placeholder="Автор" type="text">
 
-            <input class="genre-filter" placeholder="Жанр" type="text">
+            <input class="genre-filter filter-input" name="genre" placeholder="Жанр" type="text">
 
-            <input class="binding-filter" placeholder="Переплет" type="text">
+            <input class="binding-filter filter-input" name="binding" placeholder="Переплет" type="text">
 
-            <input class="year-filter-less" placeholder="Год" type="number"> 
-            <input class="year-filter-great" placeholder="Год" type="number"> 
+            <input class="year-filter-less filter-input" name="year_gte" placeholder="Год" type="number"> 
+            <input class="year-filter-great filter-input" name="year_lte" placeholder="Год" type="number"> 
             <!-- <input class="year-filter" placeholder=""> -->
             <button class="year-btn">Фильтр</button>
 

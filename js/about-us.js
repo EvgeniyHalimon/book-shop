@@ -17,6 +17,14 @@ if(role == "User"){
     editBtn.style.display = "none"
 }
 
+const linkToRightsPage = document.querySelector(".nav-rights-roles")
+const linkToUsers = document.querySelector(".nav-users")
+
+if(role == "User" || role == "Salesman"){
+    linkToRightsPage.style.display = "none"
+    linkToUsers.style.display = "none"
+}
+
 editBtn.addEventListener("click", async () => {
     const txt = await Fetch.get("about-us")
     const textArea = document.createElement("textarea")

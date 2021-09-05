@@ -319,3 +319,103 @@ label::before {
 .btn-search{
   margin-right: 10px;
 }
+
+.basket-list-elem{
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid black;
+}
+
+.basket-list-elem:last-child{
+  border-bottom: 1px solid #000;
+}
+
+.book-img-small{
+  width: 80px;
+  border-right: 1px solid black;
+}
+
+.basket-block{
+  text-align: center;
+}
+
+.confirm-btn{
+  margin-bottom: 10px;
+  width: 150px;
+  height: 30px;
+}
+
+.basket-list{
+  text-align: left;
+}
+
+.basket-list-elem div {
+  display: flex;
+  align-items: center;
+  width: 165px;
+  padding: 0 10px;
+  border-right: 1px solid black;
+}
+
+.basket-list-elem span {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border-right: 1px solid black;
+}
+
+.delete-span{
+  width: 90px;
+}
+
+.book-quantity-input{
+  width: 30px;
+  margin-right: 5px;
+  text-align: center;
+}
+
+.amount-qua, .amount-price{
+  margin-bottom: 10px;
+}
+
+.order-list{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+
+.order-elem{
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0 15px 15px 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.order-list-elem{
+  margin-right: 10px;
+  width: 300px;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.confirm_btn{
+  margin-right: 20px;
+}
+
+.confirm_btn, .decline_btn{
+  height: 40px;
+}
+
+.order-status{
+  display: flex;
+  align-self: flex-start;
+  margin-right: 5px;
+  padding: 3px;
+  border: 1px solid black;
+  border-radius: 5px;
+}

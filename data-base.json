@@ -21,7 +21,7 @@
       "surname": "tor",
       "email": "user3@mail.com",
       "password": "1461",
-      "roleName": "Admin",
+      "roleName": "Manager",
       "id": 5
     },
     {
@@ -29,7 +29,7 @@
       "surname": "dad",
       "email": "user164256@mail.com",
       "password": "7928",
-      "roleName": "Admin",
+      "roleName": "Subadmin",
       "id": 9
     },
     {
@@ -163,10 +163,10 @@
       "author": "Курт Воннегут",
       "genre": "Роман",
       "binding": "Твердый",
-      "year": "2021",
-      "price": "120",
-      "quantity": "11",
-      "pageQuantity": "225",
+      "year": 2021,
+      "price": 120,
+      "quantity": 2,
+      "pageQuantity": 225,
       "rating": 0,
       "id": 1
     },
@@ -195,64 +195,16 @@
       "id": 3
     },
     {
-      "name": "Собака Баскервилей",
-      "author": "Артур Конан Дойл",
-      "genre": "Детектив",
-      "binding": "Мягкий",
-      "year": 2019,
-      "price": 85,
-      "quantity": 2,
-      "pageQuantity": 200,
-      "rating": 1,
-      "id": 4
-    },
-    {
-      "name": "Старик и Море",
-      "author": "Эрнест Хемингуэй",
-      "genre": "Приключения",
-      "binding": "Мягкий",
-      "year": 2021,
-      "price": 65,
-      "quantity": 3,
-      "pageQuantity": 80,
-      "rating": 1,
-      "id": 5
-    },
-    {
-      "name": "Галапагос",
-      "author": "Курт Воннегут",
-      "genre": "Роман",
-      "binding": "Твердый",
-      "year": 2021,
-      "price": 250,
-      "quantity": 2,
-      "pageQuantity": 300,
-      "rating": 1,
-      "id": 6
-    },
-    {
       "name": "Бесы",
       "author": "Федор Достоевский",
       "genre": "Роман",
       "binding": "Твердый",
       "year": 2015,
       "price": 250,
-      "quantity": 3,
+      "quantity": 2,
       "pageQuantity": 450,
       "rating": 1,
       "id": 7
-    },
-    {
-      "name": "Дорога",
-      "author": "Кормак Маккарти",
-      "genre": "Постапокалиптика",
-      "binding": "Твердый",
-      "year": 2021,
-      "price": 135,
-      "quantity": 1,
-      "pageQuantity": 300,
-      "rating": 1,
-      "id": 8
     },
     {
       "name": "Старикам тут не место",
@@ -261,7 +213,7 @@
       "binding": "Твердый",
       "year": 2021,
       "price": 135,
-      "quantity": 2,
+      "quantity": 1,
       "pageQuantity": 300,
       "rating": 0,
       "id": 9
@@ -276,39 +228,84 @@
     },
     {
       "userId": 1,
-      "bookId": 5,
-      "qua": 1,
-      "id": 2
-    },
-    {
-      "userId": 1,
-      "bookId": 6,
-      "qua": 1,
-      "id": 3
-    },
-    {
-      "userId": 1,
-      "bookId": 4,
-      "qua": 1,
-      "id": 4
-    },
-    {
-      "userId": 1,
       "bookId": 3,
       "qua": 1,
       "id": 5
-    },
-    {
-      "userId": 1,
-      "bookId": 8,
-      "qua": 1,
-      "id": 6
     }
   ],
   "about-us": [
     {
-      "text": "\n            Deserunt ab doloremque consectetur laborum iusto?\n            Quas, sunt magnam? Deserunt, vero. Quis.",
+      "text": "\n            Покупайте книги у нас",
       "id": 1
+    }
+  ],
+  "basket": [
+    {
+      "amountPrice": 700,
+      "bookId": 3,
+      "bookQuantity": 2,
+      "customerId": 2,
+      "id": 3
+    }
+  ],
+  "order": [
+    {
+      "amountPrice": [
+        120,
+        135
+      ],
+      "goods": [
+        {
+          "bookId": 1,
+          "qua": 1
+        },
+        {
+          "bookId": 9,
+          "qua": 1
+        }
+      ],
+      "customerId": 1,
+      "status": "pending",
+      "id": 1
+    },
+    {
+      "amountPrice": [
+        250
+      ],
+      "goods": [
+        {
+          "bookId": 7,
+          "qua": 1
+        }
+      ],
+      "customerId": 1,
+      "status": "approved",
+      "id": 2
+    },
+    {
+      "amountPrice": [
+        135
+      ],
+      "goods": [
+        {
+          "bookId": 9,
+          "qua": 1
+        }
+      ],
+      "customerId": 3,
+      "status": "approved",
+      "id": 3
+    },
+    {
+      "goods": [
+        {
+          "bookId": 1,
+          "qua": 1
+        }
+      ],
+      "customerId": 11,
+      "status": "pending",
+      "id": 4
     }
   ]
 }

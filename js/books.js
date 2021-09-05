@@ -5,6 +5,10 @@ import printSearchRes from "./printSearhResult.js"
 import { Storage } from "./getDataFromStorage.js"
 
 const account = Storage.getData("account")
+const role = Storage.getData("role")
+
+const linkToRightsPage = document.querySelector(".nav-rights-roles")
+const linkToUsers = document.querySelector(".nav-users")
 
 const formBlock = document.querySelector(".form-block")
 const listBlock = document.querySelector(".list-block")
@@ -29,6 +33,14 @@ saveChanges.style.display = "none"
 
 tab(bookTabList,addBookTab,listBlock,formBlock)
 tab(addBookTab,bookTabList,formBlock,listBlock)
+
+if(role == "User" || role == "Salesman"){
+    linkToRightsPage.style.display = "none"
+    linkToUsers.style.display = "none"
+    addBookTab.style.display = "none"
+    formBlock.style.display = "none"
+    listBlock.style.display = "block"
+}
 
 async function getSelect(select,key,order) {
     const data = await Fetch.get(`books?_sort=${key}&_order=${order}`)
@@ -106,8 +118,8 @@ async function printBook(arr,list) {
                     <button class="btn-delete-book">Удалить</button>
                 </span>
                 <span class="buy-span">
-                    <button class="btn-plus">+</button><input class="buy-quantity" type="number"><button class="btn-minus">-</button>
-                    <button class="btn-buy">Купить</button>
+                    <button class="btn-plus">+</button><input class="buy-quantity" type="text"><button class="btn-minus">-</button>
+                    <button class="btn-buy" id="${item.id}">Купить</button>
                 </span>
             `
             elem.innerHTML = listHtml
@@ -119,10 +131,18 @@ async function printBook(arr,list) {
             const btnDelete = element.querySelector(".btn-delete-book")
             const chk = element.querySelector(".chk")
             const btnPlus = element.querySelector(".btn-plus")
-            const btnQua = element.querySelector(".buy-quantity")
+            const qua = element.querySelector(".buy-quantity")
             const btnMinus = element.querySelector(".btn-minus")
             const btnBuy = element.querySelector(".btn-buy")
             const label = element.querySelector(".label")
+            const bookQua = element.querySelector(".book-quantity")
+            const buySpan = element.querySelector(".buy-span")
+            
+
+            if(item.quantity == 0){
+                bookQua.innerHTML = " Товара нет на складе"
+                bookQua.style.color = "red"
+            }
 
             btnEdit.addEventListener("click", () => {
                 saveChanges.style.display = "flex"
@@ -142,19 +162,37 @@ async function printBook(arr,list) {
 
             btnDelete.addEventListener("click", async () => {
                 await Fetch.delete(`books/${item.id}`)
-                /* getData("books", bookList, pageList, printBook, `rating`, `desc`) */
                 const page = document.querySelector(".page-active")
                 console.log(page.id)
                 const res = await Fetch.get(`books?_page=${page.id}&_limit=5&_sort=rating&_order=desc`)
                 printBook(res, bookList) 
             })
 
+            if(role == "User" || role == "Salesman" || role == "Manager"){
+                btnDelete.style.display = "none"
+            } 
+            if(role == "User" || role == "Salesman"){
+                btnEdit.style.display = "none"
+            }
+
             btnPlus.addEventListener("click", () => {
-                btnQua.value++
+                if(qua.value < item.quantity){
+                    qua.value++
+                }
+                if(qua.value == item.quantity){
+                    qua.value = item.quantity
+                    qua.style.color = "red"
+                } 
             })
             
             btnMinus.addEventListener("click", () => {
-                btnQua.value--
+                if(qua.value <= item.quantity){
+                    qua.value--
+                    qua.style.color = "black"
+                }
+                if(qua.value <= 0){
+                    qua.value = ""
+                } 
             })
 
             const getLike = await Fetch.get(`rating?userId=${account}&bookId=${item.id}`)
@@ -176,15 +214,33 @@ async function printBook(arr,list) {
                         rating: item.rating + 1
                     }
                     await Fetch.patch(`books/${item.id}`, body)
-                    /* getData("books", bookList, pageList, printBook, `rating`, `desc`) */
                     const page = document.querySelector(".page-active")
                     console.log(page.id)
                     const res = await Fetch.get(`books?_page=${page.id}&_limit=5&_sort=rating&_order=desc`)
                     printBook(res, bookList)
                 }
             })
-            btnBuy.addEventListener("click", () => {
-                console.log("+")
+            btnBuy.addEventListener("click", async () => {
+                const basket = await Fetch.get("basket")
+                const find = basket.find((i) => {
+                    return i.bookId == item.id
+                })
+                if(find){
+                    let sum = find.bookQuantity + +qua.value
+                    const body = {
+                        amountPrice: +item.price * +sum,
+                        bookQuantity: +sum
+                    }
+                    await Fetch.patch(`basket/${find.id}`, body) 
+                } else{
+                    const body = {
+                        amountPrice: +item.price * +qua.value,
+                        bookId: +item.id,
+                        bookQuantity: +qua.value,
+                        customerId: account
+                    }
+                    await Fetch.post("basket", body)
+                }
             })
         }
         list.appendChild(elem)
@@ -213,11 +269,9 @@ const bookSearch = document.querySelector(".book-search")
 const btnSearch = document.querySelector(".btn-search")
 
 const authorFilter = document.querySelector(".author-filter")
-const genreFilter = document.querySelector(".genre-filter")
-const bindingFilter = document.querySelector(".binding-filter")
 const yearFilterLess = document.querySelector(".year-filter-less")
 const yearFilterGreat = document.querySelector(".year-filter-great")
-const yearBtn = document.querySelector(".year-btn")
+const filterBtn = document.querySelector(".year-btn")
 
 yearFilterLess.value = 2021
 yearFilterGreat.value = 2021
@@ -225,37 +279,17 @@ yearFilterGreat.value = 2021
 const priceFilter = document.querySelector(".price-filter")
 const priceBtn = document.querySelector(".price-btn")
 
-function search(key1, key2, key3, key4, key5) {
-    yearBtn.addEventListener("click", async () => {
-        let str1 = `author=${key1.value}&`
-        let str2 = `binding=${key2.value}&`
-        let str3 = `genre=${key3.value}&`
-        let str4 = `year_gte=${Number(key4.value)}&`
-        let str5 = `year_lte=${Number(key5.value)}`
-        if(key1.value == ""){
-            str1 = ""
+const filterInput = document.querySelectorAll(".filter-input")
+
+filterBtn.addEventListener("click", async () => {
+    let url = "books?"
+    for (const elem of filterInput) {
+        if(elem.value){
+            url = url + `${elem.name}=${elem.value}&`
         }
-        if(key2.value == ""){
-            str2 = ""
-        }
-        if(key3.value == ""){
-            str3 = ""
-        }
-        if(key4.value == ""){
-            str4 = ""
-        }
-        if(key5.value == ""){
-            str5 = ""
-        }  
-        if(key1.value == "" && key2.value == "" && key3.value == "" && key4.value == "" && key5.value == ""){
-            printSearchRes("books?", bookList, pageList, printBook, `rating`, `desc`)
-        }
-        const searchRes = await Fetch.get(`books?${str1}${str2}${str3}${str4}`)
-        console.log(searchRes)
-        printSearchRes(`books?${str1}${str2}${str3}${str4}${str5}`, bookList, pageList, printBook, `rating`, `desc`)
-    })
-}
-search(authorFilter, bindingFilter, genreFilter, yearFilterLess, yearFilterGreat)
+    }
+    printSearchRes(url, bookList, pageList, printBook, `rating`, `desc`)
+})
 
 btnSearch.addEventListener("click", async () => {
     printSearchRes(`books?q=${bookSearch.value}`, bookList, pageList, printBook, `rating`, `desc`)
@@ -269,5 +303,6 @@ priceBtn.addEventListener("click", () => {
         printSearchRes("books?", bookList, pageList, printBook, `price`, `asc`)
     }
 })
+
 
 

@@ -18,6 +18,6 @@ async function loginUser(e) {
     }
     Storage.setData("account", res[0].id)
     Storage.setData("role", res[0].roleName)
-    document.location.href="../html/rights-roles.html"
+    document.location.href="../html/books.html"
 }
 

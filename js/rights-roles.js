@@ -1,7 +1,7 @@
 import { Fetch } from "./fetches.js"
 import getData  from "./getData.js"
 import tab from "./tab.js"
-import printSearchRes from "./printSearhResult.js"
+import { Storage } from "./getDataFromStorage.js"
 
 const roleTab = document.querySelector(".role-tab")
 const rightsTab = document.querySelector(".rights-tab")
@@ -13,6 +13,13 @@ const saveBtn = document.querySelector(".close")
 const pagesList = document.querySelector(".pages")
 const rightsBlock = document.querySelector(".rights-block")
 const roleBlock = document.querySelector(".role-block")
+
+const role = Storage.getData("role")
+
+if(role != "Admin"){
+    roleBlock.style.display = "none"
+    roleTab.style.display = "none"
+}
 
 tab(roleTab,rightsTab,roleBlock,rightsBlock)
 tab(rightsTab,roleTab,rightsBlock,roleBlock)
@@ -26,11 +33,19 @@ createRuleBtn.addEventListener("click", async () => {
     }
 })
 
-saveBtn.addEventListener("click", () => {
+saveBtn.addEventListener("click", async () => {
     const body = {
         name: rightsInput.value
     }
     Fetch.post("rights", body)
+    const res = await Fetch.get("rights")
+    const lastId = res.length + 1
+    const rightsID = await Fetch.get("roles/1")
+    let arr = rightsID.rightsIds.push(lastId)
+    const newRight = {
+        rightsIds : rightsID.rightsIds
+    }
+    Fetch.patch("roles/1", newRight)
     modalRight.style.display = "none" 
     getData("rights", ruleList, pagesList, print, `name`, `asc`)
 })
