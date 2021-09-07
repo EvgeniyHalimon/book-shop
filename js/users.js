@@ -14,10 +14,21 @@ const userPassword = document.querySelector(".password")
 const genPass = document.querySelector(".genPass")
 const genEmail = document.querySelector(".genEmail")
 const select = document.querySelector(".rank")
+const linkToRightsPage = document.querySelector(".nav-rights-roles")
+const linkToUsers = document.querySelector(".nav-users")
 
 getData("users", usersList, pageList, printUser, `roleName`, `asc`)
 
-/* const role = Storage.getData("role") */
+const role = Storage.getData("role")
+
+async function checkRights(){
+    const res = await Fetch.get(`roles?name=${role}`)
+    const [{rightsIds}] = res
+    if(!rightsIds.includes(4) && !rightsIds.includes(5) && !rightsIds.includes(6)){
+        linkToRightsPage.style.display = "none"
+    }
+}
+checkRights()
 
 async function printUser(arr,list) {
     list.innerHTML = ""
@@ -48,6 +59,21 @@ async function printUser(arr,list) {
             const email = element.querySelector(".email")
             const roleName = element.querySelector(".roleName")
             const btnSpan = element.querySelector(".span-btn")
+
+            async function checkRights(){
+                const res = await Fetch.get(`roles?name=${role}`)
+                const [{rightsIds}] = res
+                if(!rightsIds.includes(1)){
+                    btnEdit.style.display = "none"
+                }
+                if(!rightsIds.includes(2)){
+                    createBtn.style.display = "none"
+                }
+                if(!rightsIds.includes(3)){
+                    btnDelete.style.display = "none"
+                }
+            }
+            checkRights()
 
             btnEdit.addEventListener("click", () => {
                 btnEdit.style.display = "none"

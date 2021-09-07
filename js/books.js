@@ -36,13 +36,29 @@ deleteBlock.style.display = "none"
 tab(bookTabList,addBookTab,listBlock,formBlock)
 tab(addBookTab,bookTabList,formBlock,listBlock)
 
-if(role == "User" || role == "Salesman"){
-    linkToRightsPage.style.display = "none"
-    linkToUsers.style.display = "none"
-    addBookTab.style.display = "none"
-    formBlock.style.display = "none"
-    listBlock.style.display = "block"
+async function checkRights(){
+    const res = await Fetch.get(`roles?name=${role}`)
+    const [{rightsIds}] = res
+    if(!rightsIds.includes(1) && !rightsIds.includes(2) && !rightsIds.includes(3)){
+        linkToUsers.style.display = "none"
+    }
+    if(!rightsIds.includes(4) && !rightsIds.includes(5) && !rightsIds.includes(6)){
+        linkToRightsPage.style.display = "none"
+    }
+    if(!rightsIds.includes(7)){
+        formBlock.style.display = "none"
+        listBlock.style.display = "block"
+        addBookTab.style.display = "none"
+        bookTabList.style.background = "tomato"
+    }
+    if(rightsIds.includes(7)){
+        formBlock.style.display = "block"
+        addBookTab.style.display = "inline-block"
+        addBookTab.style.background = "tomato"
+        bookTabList.style.background = "gray"
+    }
 }
+checkRights()
 
 async function getSelect(select,key,order) {
     const data = await Fetch.get(`books?_sort=${key}&_order=${order}`)
@@ -184,12 +200,20 @@ async function printBook(arr,list) {
                 })
             })
 
-            if(role == "User" || role == "Salesman" || role == "Manager"){
-                btnDelete.style.display = "none"
-            } 
-            if(role == "User" || role == "Salesman"){
-                btnEdit.style.display = "none"
+            async function checkRights(){
+                const res = await Fetch.get(`roles?name=${role}`)
+                const [{rightsIds}] = res
+                if(!rightsIds.includes(8)){
+                    btnEdit.style.display = "none"
+                }
+                if(!rightsIds.includes(9)){
+                    btnDelete.style.display = "none"
+                }
+                if(!rightsIds.includes(12)){
+                    buySpan.style.display = "none"
+                }
             }
+            checkRights()
 
             btnPlus.addEventListener("click", () => {
                 if(qua.value < item.quantity){
@@ -236,10 +260,6 @@ async function printBook(arr,list) {
                     printBook(res, bookList)
                 }
             })
-
-            if(role != "User" || role != "Admin"){
-                buySpan.style.display = "none"
-            }
 
             btnBuy.addEventListener("click", async () => {
                 const basket = await Fetch.get("basket")

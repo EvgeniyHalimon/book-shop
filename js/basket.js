@@ -11,10 +11,17 @@ const role = Storage.getData("role")
 const linkToRightsPage = document.querySelector(".nav-rights-roles")
 const linkToUsers = document.querySelector(".nav-users")
 
-if(role == "User" || role == "Salesman"){
-    linkToRightsPage.style.display = "none"
-    linkToUsers.style.display = "none"
+async function checkRights(){
+    const res = await Fetch.get(`roles?name=${role}`)
+    const [{rightsIds}] = res
+    if(!rightsIds.includes(1) && !rightsIds.includes(2) && !rightsIds.includes(3)){
+        linkToUsers.style.display = "none"
+    }
+    if(!rightsIds.includes(4) && !rightsIds.includes(5) && !rightsIds.includes(6)){
+        linkToRightsPage.style.display = "none"
+    }
 }
+checkRights()
 
 getGoods()
 async function getGoods() {

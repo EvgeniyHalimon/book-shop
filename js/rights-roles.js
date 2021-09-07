@@ -22,6 +22,20 @@ if(role != "Admin"){
     roleTab.style.display = "none"
 }
 
+async function checkRights(){
+    const res = await Fetch.get(`roles?name=${role}`)
+    const [{rightsIds}] = res
+    if(!rightsIds.includes(1) && !rightsIds.includes(2) && !rightsIds.includes(3)){
+        linkToUsers.style.display = "none"
+    }
+    if(!rightsIds.includes(4) && !rightsIds.includes(5)){
+        roleBlock.style.display = "none"
+        roleTab.style.display = "none"
+        rightsBlock.style.display = "Block"
+    }
+}
+checkRights()
+
 tab(roleTab,rightsTab,roleBlock,rightsBlock)
 tab(rightsTab,roleTab,rightsBlock,roleBlock)
 

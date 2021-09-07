@@ -200,14 +200,11 @@ input[type="checkbox"]{
 }
 
 .add-book-tab{
-  background: tomato;
-}
-
-.book-list-tab{
-  background: gray;
+  display: none;
 }
 
 .form-block{
+  display: none;
   width: 500px;
   margin: 0 auto;
 }
