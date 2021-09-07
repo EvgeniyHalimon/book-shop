@@ -56,7 +56,6 @@
 
             <input class="year-filter-less filter-input" name="year_gte" placeholder="Год" type="number"> 
             <input class="year-filter-great filter-input" name="year_lte" placeholder="Год" type="number"> 
-            <!-- <input class="year-filter" placeholder=""> -->
             <button class="year-btn">Фильтр</button>
 
             <select class="price-filter">
@@ -68,7 +67,13 @@
         <ul class="book-list"></ul>
         <ul class="page-list"></ul>
     </div>
-
+    <div class="delete-block">
+        <form class="modal_content-delete">
+            <h3>Вы действительно хотите удалить эту книгу?</h3>
+            <button class="yes-btn">Да</button> 
+            <button class="no-btn">Нет</button> 
+        </form>
+    </div>
     <script src="../js/books.js" type="module"></script>
 </body>
 </html>

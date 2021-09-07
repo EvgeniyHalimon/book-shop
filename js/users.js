@@ -1,5 +1,6 @@
 import { Fetch } from "./fetches.js"
 import getData  from "./getData.js"
+import { Storage } from "./getDataFromStorage.js"
 
 const createBtn = document.querySelector(".create-user")
 const usersList = document.querySelector(".users-list")
@@ -15,6 +16,8 @@ const genEmail = document.querySelector(".genEmail")
 const select = document.querySelector(".rank")
 
 getData("users", usersList, pageList, printUser, `roleName`, `asc`)
+
+/* const role = Storage.getData("role") */
 
 async function printUser(arr,list) {
     list.innerHTML = ""
@@ -79,7 +82,6 @@ async function printUser(arr,list) {
                         roleName: selectEdit.value
                     }
                     await Fetch.patch(`users/${item.id}`, body)
-                    /* getData("users", usersList, pageList, printUser, `roleName`, `asc`) */
                     const page = document.querySelector(".page-active")
                     const res = await Fetch.get(`users?_page=${page.id}&_limit=5&_sort=roleName&_order=asc`)
                     printUser(res, usersList) 
@@ -87,7 +89,6 @@ async function printUser(arr,list) {
             })
             btnDelete.addEventListener("click", async () => {
                 await Fetch.delete(`users/${item.id}`)
-                /* getData("users", usersList, pageList, printUser, `roleName`, `asc`) */
                 const page = document.querySelector(".page-active")
                 const res = await Fetch.get(`users?_page=${page.id}&_limit=5&_sort=roleName&_order=asc`)
                 printUser(res, usersList) 

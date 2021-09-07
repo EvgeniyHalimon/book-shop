@@ -3,6 +3,8 @@ import { Storage } from "./getDataFromStorage.js"
 
 
 const orderList = document.querySelector(".order-list")
+const orderOption = document.querySelector(".order-option")
+const orderBtn = document.querySelector(".option-btn")
 const account = Storage.getData("account")
 const role = Storage.getData("role")
 
@@ -12,10 +14,26 @@ const linkToUsers = document.querySelector(".nav-users")
 if(role == "User" || role == "Salesman"){
     linkToRightsPage.style.display = "none"
     linkToUsers.style.display = "none"
+    orderOption.style.display = "none"
 }
 
+orderBtn.addEventListener("click", () => {
+    if(orderOption.value == "all"){
+        printOrders(`order`)
+    }
+    if(orderOption.value == "approved"){
+        printOrders(`order?status=approved`)
+    }
+    if(orderOption.value == "rejected"){
+        printOrders(`order?status=rejected`)
+    }
+    if(orderOption.value == "pending"){
+        printOrders(`order?status=pending`)
+    }
+})
+
 if(role != "User"){
-    printOrders("order")
+    printOrders(`order?status=pending`)
 } else if(role == "User"){
     printOrders(`order?customerId=${account}`)
 }
@@ -38,10 +56,16 @@ async function printOrders(key){
 
         if(item.status == "approved"){
             status.style.background = "green"
-        } else if(item.status == "pending"){
+            confirmBtn.style.display = "none"
+            declineBtn.style.display = "none"
+        }
+        if(item.status == "pending"){
             status.style.background = "yellow"
-        } else {
+        }
+        if(item.status == "rejected"){
             status.style.background = "red"
+            confirmBtn.style.display = "none"
+            declineBtn.style.display = "none"
         }
 
         item.goods.forEach(async (elem) => {
@@ -67,15 +91,15 @@ async function printOrders(key){
                 li.appendChild(declineBtn)
             }    
             confirmBtn.addEventListener("click", async () => {
-                const q = {
+                const qua = {
                     quantity: bookRes.quantity - elem.qua
                 }
-                await Fetch.patch(`books/${elem.bookId}`, q)
+                Fetch.patch(`books/${elem.bookId}`, qua)
                 const body = {
                     status: "approved"
                 }
-                await Fetch.patch(`order/${item.id}`, body)
-                printOrders()
+                Fetch.patch(`order/${item.id}`, body)
+                window.location.reload()
             })
         })
         orderList.appendChild(li)
@@ -85,8 +109,8 @@ async function printOrders(key){
             const body = {
                 status: "rejected"
             }
-            await Fetch.patch(`order/${item.id}`, body)
-            printOrders()
+            Fetch.patch(`order/${item.id}`, body)
+            window.location.reload()
         })
         if(role == "User"){
             confirmBtn.style.display = "none"

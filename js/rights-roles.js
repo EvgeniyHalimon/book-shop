@@ -13,6 +13,7 @@ const saveBtn = document.querySelector(".close")
 const pagesList = document.querySelector(".pages")
 const rightsBlock = document.querySelector(".rights-block")
 const roleBlock = document.querySelector(".role-block")
+const linkToUsers = document.querySelector(".nav-users")
 
 const role = Storage.getData("role")
 

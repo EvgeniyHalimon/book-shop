@@ -85,7 +85,8 @@
 
 .modal-right, 
 .modal-role,
-.modal-user{
+.modal-user,
+.delete-block{
   display: none;
   position: fixed;
   top: 0;
@@ -98,7 +99,8 @@
 
 .modal_content-right,
 .modal_content-role,
-.modal_content-user{
+.modal_content-user,
+.modal_content-delete{
   display: grid;
   margin: 200px auto;
   background: white;
@@ -418,4 +420,10 @@ label::before {
   padding: 3px;
   border: 1px solid black;
   border-radius: 5px;
+}
+
+.select-block{
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
 }

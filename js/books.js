@@ -30,6 +30,8 @@ const pageQuantity = document.querySelector(".page-quantity")
 const bookSave = document.querySelector(".book-save")
 const saveChanges = document.querySelector(".save-changes")
 saveChanges.style.display = "none"
+const deleteBlock = document.querySelector(".delete-block")
+deleteBlock.style.display = "none"
 
 tab(bookTabList,addBookTab,listBlock,formBlock)
 tab(addBookTab,bookTabList,formBlock,listBlock)
@@ -46,14 +48,12 @@ async function getSelect(select,key,order) {
     const data = await Fetch.get(`books?_sort=${key}&_order=${order}`)
     let resArr = []
     data.filter((item) => {
-        let i = resArr.findIndex(x => (x[key] == item[key]));
-        
+        let i = resArr.findIndex(x => (x[key] == item[key]))
         if(i <= -1){
-            resArr.push(item);
+            resArr.push(item)
         }
-        return null;
+        return null
     })
-
     resArr.forEach((item) => {
         const option = document.createElement("option")
         option.id = `${item.id}+`
@@ -138,7 +138,6 @@ async function printBook(arr,list) {
             const bookQua = element.querySelector(".book-quantity")
             const buySpan = element.querySelector(".buy-span")
             
-
             if(item.quantity == 0){
                 bookQua.innerHTML = " Товара нет на складе"
                 bookQua.style.color = "red"
@@ -160,12 +159,29 @@ async function printBook(arr,list) {
                 listBlock.style.display = "none"
             })
 
-            btnDelete.addEventListener("click", async () => {
-                await Fetch.delete(`books/${item.id}`)
-                const page = document.querySelector(".page-active")
-                console.log(page.id)
-                const res = await Fetch.get(`books?_page=${page.id}&_limit=5&_sort=rating&_order=desc`)
-                printBook(res, bookList) 
+            btnDelete.addEventListener("click", () => {
+                deleteBlock.style.display = "block"
+                const yesBtn = document.querySelector(".yes-btn")
+                const noBtn = document.querySelector(".no-btn")
+
+                yesBtn.addEventListener("click", async () => {
+                    await Fetch.delete(`books/${item.id}`)
+                    const page = document.querySelector(".page-active")
+                    console.log(page.id)
+                    const res = await Fetch.get(`books?_page=${page.id}&_limit=5&_sort=rating&_order=desc`)
+                    printBook(res, bookList) 
+                })
+
+                noBtn.addEventListener("click", (event) => {
+                    event.preventDefault()
+                    formBlock.style.display = "none"
+                    deleteBlock.style.display = "none"
+                    window.onclick = function (event) {
+                        if(event.target == deleteBlock){
+                            deleteBlock.style.display = "none"
+                        }
+                    }
+                })
             })
 
             if(role == "User" || role == "Salesman" || role == "Manager"){
@@ -220,6 +236,11 @@ async function printBook(arr,list) {
                     printBook(res, bookList)
                 }
             })
+
+            if(role != "User" || role != "Admin"){
+                buySpan.style.display = "none"
+            }
+
             btnBuy.addEventListener("click", async () => {
                 const basket = await Fetch.get("basket")
                 const find = basket.find((i) => {
@@ -303,6 +324,4 @@ priceBtn.addEventListener("click", () => {
         printSearchRes("books?", bookList, pageList, printBook, `price`, `asc`)
     }
 })
-
-
 
